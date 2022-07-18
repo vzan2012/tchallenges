@@ -40,12 +40,6 @@ const todo: TodoPreview = {
 
 // console.log(todo);
 
-// type TodoExclude = Exclude<"completed", Todo>;
-// const todoX: TodoExclude = {
-//   title: "Test Title",
-//   description: "Test desc",
-// };
-
 /**
  * ReadOnly
  */
@@ -83,3 +77,41 @@ type First<T extends any[]> = T extends [] ? never : T[0];
  */
 type Length<T extends any[]> = T["length"];
 type lengthHead = Length<arr1>;
+
+/**
+ * Exclude
+ */
+type MyExclude<T, K> = T extends K ? never : T;
+
+type TodoExclude = MyExclude<Todo, "completed">;
+// const todoX: TodoExclude = {
+//   title: "Test Title",
+//   description: "Test desc",
+// };
+
+/**
+ * Awaited
+ */
+type ExampleType = Promise<string>;
+type MyAwaited<T> = T extends Promise<infer U> ? U : never;
+type Result = MyAwaited<ExampleType>;
+
+/**
+ * Boolean
+ */
+type If<T extends Boolean, A, B> = T extends true ? A : B;
+type A = If<true, "a", "b">;
+type B = If<false, "a", "b">;
+
+/**
+ * Concat
+ */
+type Concat<T extends any[], P extends any[]> = [...T, ...P];
+type Result1 = Concat<[1], [2]>;
+
+/**
+ * Includes
+ */
+// TODO: Need to Rework
+// type Includes<T extends any[], V extends string|number> = V infer T ? true:false;
+// type Planets = Includes<["Earth", "Mars", "Venus", "Jupiter", "Pluto"], "Mars">;
