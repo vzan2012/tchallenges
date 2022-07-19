@@ -72,6 +72,8 @@ type arr1 = ["one", "two"];
 
 type First<T extends any[]> = T extends [] ? never : T[0];
 
+type FirstResult = First<arr1>;
+
 /**
  * Length
  */
@@ -112,6 +114,30 @@ type Result1 = Concat<[1], [2]>;
 /**
  * Includes
  */
-// TODO: Need to Rework
-// type Includes<T extends any[], V extends string|number> = V infer T ? true:false;
-// type Planets = Includes<["Earth", "Mars", "Venus", "Jupiter", "Pluto"], "Mars">;
+type Includes<T extends any[], V> = V extends T[number] ? true : false;
+type Planets = Includes<["Earth", "Mars", "Venus", "Jupiter", "Pluto"], "Mars">;
+
+/**
+ * Push
+ */
+type Push<T extends (string | number)[], E extends any> = [...T, E];
+type PushResult = Push<[1, 2], "3">;
+
+/**
+ * Unshift
+ */
+type Unshift<T extends number[], E extends number> = [E, ...T];
+type UnshiftResult = Unshift<[1, 2], 0>;
+
+/**
+ * Parameters
+ */
+
+const foo = (arg1: string, arg2: number): void => {};
+
+type MyParameters<T extends (...args: any[]) => any> = T extends (
+  ...args: infer T
+) => any
+  ? T
+  : never;
+type FunctionArgs = MyParameters<typeof foo>;
