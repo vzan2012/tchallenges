@@ -3,8 +3,10 @@ import "./style.css";
 const displayContent = `
 <div>
   <h1>TypeScript Challenges</h1>
-  <ol>
-    <li> Hello World </li>
+  <div>
+    <h3>Easy Level</h3>
+    <p>Hello World, Pick, Readonly, Tuple to Object, First of Array, Length, Exclude, Awaited, Boolean, Concat, Includes, Push, Unshift and
+    Parameters</p>
   </ol>
 </div>
 `;
